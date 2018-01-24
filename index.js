@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require('socket.io')(http);
+const port = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 var users = [];
@@ -40,6 +41,6 @@ io.on('connection', function(socket){
 
 });
 
-http.listen('3000', function(){
-    console.log('App is running on port 3000');
+http.listen(port, function(){
+    console.log('App is running on port'+port);
 });
