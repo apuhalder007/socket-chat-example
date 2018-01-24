@@ -7,6 +7,7 @@
     <title>socket.io chat</title>
     <!-- Bootstrap CSS 3.3.7 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"> </script>
     <!-- jQuery JS 3.1.0 -->
@@ -40,8 +41,33 @@
                         </div>
                     </div>
                 </div>
+                    
             </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="btn-panel btn-panel-conversation">
+                        <a href="" class="btn  col-lg-6 send-message-btn " role="button"><i class="fa fa-search"></i> Search</a>
+                        <a href="" class="btn  col-lg-6  send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> New Message</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-7">
+                    <div class="btn-panel btn-panel-msg">
+
+                        <a href="" class="btn  col-lg-3  send-message-btn pull-right" role="button"><i class="fa fa-gears"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="conversation-wrap col-lg-3 col-lg-offset-4" id="users"></div>
+            </div>
+
+
         </div>
-     </div>
+    </div>
 </body>
 </html>
