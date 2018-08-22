@@ -48,7 +48,7 @@ $(document).ready(function(){
                         
                         <div class="media-body">
                             <h5 class="media-heading">${userData.username}</h5>
-                            <small>Hello</small>
+                            <small id="new_notif_${userData.chat_id}">new message</small>
                         </div>
                     </div>`;
 
@@ -96,7 +96,7 @@ $(document).ready(function(){
         var receiver_id = $(this).data('receiver-id');
         var receiver_name = $(this).data('receiver-name');
         var msg = $("#m-" + receiver_id).val();
-        alert(receiver_name + "@@" + msg)
+        //alert(receiver_name + "@@" + msg)
         socket.emit("chat", {
             receiver_id: receiver_id,
             receiver_name: receiver_name,
@@ -124,6 +124,8 @@ $(document).ready(function(){
        var messageHtml =
            `<li class='pull-${data.align}'> ${data.sender} - ${data.msg} </li>`
         $('.chat-wrapper #chat-modal-' + data.receiver_id + ' .messages').append(messageHtml);
+
+        $("#users #new_notif" + data.sender_chat_id).text('test');
     })
 
     socket.on('typing', function (user) {

@@ -11,13 +11,27 @@ app.get('/', function(req, res){
     res.render('index.html');
 });
 io.on('connection', function(socket){
-    console.log('One client has connected!');
-
+    
     socket.on('join chat', function (user) {
+        console.log('One client has connected!');
         console.log(user);
         users.push(user);
         io.sockets.emit('users', users);
     });
+    socket.on("disconnect", function(){
+        let disconnected_id = this.id;
+        let user_index = users.find((o, i) => {
+            
+            if (o.chat_id == disconnected_id) {
+                users.splice(i, 1);
+                io.sockets.emit('users', users);
+                // console.log(user_index);
+                return true; // stop searching
+            }
+        });
+
+        
+    })
 
     socket.on('chat', function(data){
 
@@ -28,8 +42,12 @@ io.on('connection', function(socket){
         }
         
         //console.log(senderInfo);
-        io.to(data.receiver_id).emit('chat', { receiver_id: socket.id, sender: senderInfo.username, msg: data.msg, align: "left"});
-        io.to(socket.id).emit('chat', { receiver_id: data.receiver_id, sender: 'You', msg: data.msg, align: "right"});
+        io.to(data.receiver_id).emit('chat', { receiver_id: socket.id, 
+                                            sender: senderInfo.username, 
+                                            msg: data.msg, 
+                                            sender_chat_id: senderInfo.chat_id,
+                                            align: "left"});
+        //io.to(socket.id).emit('chat', { receiver_id: data.receiver_id, sender: 'You', msg: data.msg, align: "right"});
     });
 
 
